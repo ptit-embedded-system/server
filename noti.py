@@ -1,7 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, messaging
 
-firebase_cred = credentials.Certificate("firebase.json")
+firebase_cred = credentials.Certificate("./config/google-services.json")
 firebase_app = firebase_admin.initialize_app(firebase_cred)
 
 
