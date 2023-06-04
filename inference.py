@@ -9,6 +9,7 @@ from object_detection.utils import ops as utils_ops
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as viz_util
 
+
 def make_infer(model, image_np):
     output_dict = run_inference_for_single_image(model, image_np)
     boxes = []
@@ -23,7 +24,6 @@ def make_infer(model, image_np):
             distance_max = int(distance_finder(focus_length, label_id_with_known_width[x][1], _w))
             # distances.append((_x, _y, _w, _h, distance_min))
             distances.append(distance_min)
-
 
             classes.append(x)
             boxes.append(output_dict["detection_boxes"][i])
@@ -43,11 +43,13 @@ def make_infer(model, image_np):
     # )
     return distances, classes, scores
 
+
 def distance_finder(focus_length, real_width, width_in_frame):
     distance = (real_width * focus_length) / width_in_frame
 
     # return the distance
     return distance
+
 
 def run_inference_for_single_image(model, image):
     image = np.asarray(image)
@@ -67,6 +69,7 @@ def run_inference_for_single_image(model, image):
         output_dict["detection_masks_reframed"] = detection_masks_reframed.numpy()
 
     return output_dict
+
 
 def load_image_into_numpy_array(path):
     img_data = tf.io.gfile.GFile(path, "rb").read()

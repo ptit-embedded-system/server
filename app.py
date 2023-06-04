@@ -1,6 +1,8 @@
 import os.path
 import time
 import tensorflow as tf
+
+import sound
 from helpers import paths
 from inference import make_infer, category_index
 from test import test_make_infer
@@ -42,6 +44,7 @@ def upload_file():
         print(classes)
         for i in range(len(classes)):
             print(labels.get(classes[i]) + " " + str(distances[i]))
+
         return "[SUCCESS] Image Received", 201
     else:
         return "[FAILED] Image not received", 204
