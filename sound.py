@@ -6,9 +6,9 @@ from client import cloudinary_client
 from client import redis_client
 
 
-def convert_text_to_speech(text):
+def convert_text_to_speech(text) -> str:
     if len(text) == 0:
-        return
+        return ""
     tts = gTTS(text=text, lang='vi')
     sound_name = f'./alert_sound/{get_time()}.mp3'
     tts.save(sound_name)
@@ -16,6 +16,7 @@ def convert_text_to_speech(text):
     resp = dict(cld.upload_file(file_path=sound_name))
     redis = redis_client.RedisClient()
     redis.set(sound_name, resp.get("secure_url"))
+    return sound_name
 
 
 def get_sound_path(sound_name):
@@ -30,4 +31,4 @@ def get_time() -> str:
 
 
 if __name__ == "__main__":
-    convert_text_to_speech("cút dô lề, xe hốt bây giờ")
+    convert_text_to_speech("dô lề, xe hốt bây giờ")

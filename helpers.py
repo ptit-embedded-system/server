@@ -31,3 +31,70 @@ files = {
     "TF_RECORD_SCRIPT": os.path.join(paths["SCRIPTS_PATH"], TF_RECORD_SCRIPT_NAME),
     "LABELMAP": os.path.join(paths["ANNOTATION_PATH"], LABEL_MAP_NAME),
 }
+
+labels_vi = [
+  {
+    'id': 1,
+    'name': 'người'
+  },
+  {
+    'id': 2,
+    'name': 'xe đạp'
+  },
+  {
+    'id': 3,
+    'name': 'ô tô'
+  },
+  {
+    'id': 4,
+    'name': 'xe máy'
+  },
+  {
+    'id': 5,
+    'name': 'máy bay'
+  },
+  {
+    'id': 6,
+    'name': 'xe buýt'
+  },
+  {
+    'id': 7,
+    'name': 'tàu hoả'
+  },
+  {
+    'id': 8,
+    'name': 'xe tải'
+  },
+  {
+    'id': 15,
+    'name': 'ghế dài'
+  },
+  {
+    'id': 16,
+    'name': 'chim'
+  },
+  {
+    'id': 17,
+    'name': 'mèo'
+  },
+  {
+    'id': 18,
+    'name': 'chó'
+  },
+  {
+    'id': 62,
+    'name': 'ghế đơn'
+  },
+  {
+    'id': 70,
+    'name': 'toilet'
+  },
+  {
+    'id': 72,
+    'name': 'ti vi'
+  },
+  {
+    'id': 84,
+    'name': 'sách'
+  }
+]

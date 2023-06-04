@@ -2,10 +2,12 @@ import os.path
 import time
 import tensorflow as tf
 
+import noti
 import sound
 from helpers import paths
 from inference import make_infer, category_index
 from test import test_make_infer
+from helpers import labels_vi
 
 
 import numpy as np
@@ -15,7 +17,7 @@ import cv2
 tf.keras.backend.clear_session()
 model = tf.saved_model.load(os.path.join(paths["EXPORT_MODEL"], "saved_model"))
 model = model.signatures["serving_default"]
-labels = {i.get("id"): i.get("name") for i in category_index.values()}
+labels = {i.get("id"): i.get("name") for i in labels_vi.values()}
 # pool_labels_ids = list(map(lambda item: item["id"], list(category_index.values())))
 
 app = Flask(__name__)
@@ -42,9 +44,19 @@ def upload_file():
         distances, classes, scores = make_infer(model, image_np)
         print(distances)
         print(classes)
+        vat_can = ""
+        min_dis = 1000000
         for i in range(len(classes)):
+            vat_can += labels.get(classes[i]) + ", " if i != len(classes) - 1 else ""
+            min_dis = min(min_dis, distances[i])
             print(labels.get(classes[i]) + " " + str(distances[i]))
 
+        alert_str = f'phía trước có {len(classes)} vật cản là {vat_can}. Vật cản gần nhất cách bạn {min_dis} mét'
+        sound_name = sound.convert_text_to_speech(alert_str)
+        if sound_name == "":
+            return "[FAILED] Image not received", 204
+        firebase = noti.Firebase()
+        firebase.push_all_device("sound_name", sound_name)
         return "[SUCCESS] Image Received", 201
     else:
         return "[FAILED] Image not received", 204
