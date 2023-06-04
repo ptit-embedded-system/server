@@ -18,10 +18,12 @@ def make_infer(model, image_np):
     for i, x in enumerate(output_dict["detection_classes"]):
         if x in pool_labels_ids and output_dict["detection_scores"][i] > 0.5:
             _x, _y, _w, _h = output_dict["detection_boxes"][i]
-            print("bbox", output_dict["detection_boxes"][i])
+            # print("bbox", output_dict["detection_boxes"][i])
             distance_min = int(distance_finder(focus_length, label_id_with_known_width[x][0], _w))
             distance_max = int(distance_finder(focus_length, label_id_with_known_width[x][1], _w))
-            distances.append((_x, _y, _w, _h, distance_min))
+            # distances.append((_x, _y, _w, _h, distance_min))
+            distances.append(distance_min)
+
 
             classes.append(x)
             boxes.append(output_dict["detection_boxes"][i])
@@ -29,16 +31,16 @@ def make_infer(model, image_np):
     boxes = np.array(boxes)
     classes = np.array(classes)
     scores = np.array(scores)
-    viz_util.visualize_boxes_and_labels_on_image_array(
-        image_np,
-        boxes,
-        classes,
-        scores,
-        category_index,
-        instance_masks=output_dict.get("detection_masks_reframed", None),
-        use_normalized_coordinates=True,
-        line_thickness=1,
-    )
+    # viz_util.visualize_boxes_and_labels_on_image_array(
+    #     image_np,
+    #     boxes,
+    #     classes,
+    #     scores,
+    #     category_index,
+    #     instance_masks=output_dict.get("detection_masks_reframed", None),
+    #     use_normalized_coordinates=True,
+    #     line_thickness=1,
+    # )
     return distances, classes, scores
 
 def distance_finder(focus_length, real_width, width_in_frame):
