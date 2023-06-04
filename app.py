@@ -5,6 +5,8 @@ import numpy as np
 from flask import Flask, request, jsonify, send_file
 import cv2
 
+import sound
+
 app = Flask(__name__)
 
 
@@ -34,8 +36,7 @@ def upload_file():
 @app.route("/get-alert_sound", methods=["GET"])
 def get_alert_sound():
     sound_name = request.args.get('sound_name')
-    filename = f'alert_sound/{sound_name}.mp3'
-    return send_file(filename, as_attachment=True)
+    return sound.get_sound_path(sound_name)
 
 
 @app.route('/')

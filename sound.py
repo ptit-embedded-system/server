@@ -3,6 +3,7 @@ from datetime import datetime
 from gtts import gTTS
 
 from client import cloudinary_client
+from client import redis_client
 
 
 def convert_text_to_speech(text):
@@ -12,8 +13,14 @@ def convert_text_to_speech(text):
     sound_name = f'./alert_sound/{get_time()}.mp3'
     tts.save(sound_name)
     cld = cloudinary_client.CloudinaryClient()
-    resp = cld.upload_file(file_path=sound_name)
-    print(resp)
+    resp = dict(cld.upload_file(file_path=sound_name))
+    redis = redis_client.RedisClient()
+    redis.set(sound_name, resp.get("secure_url"))
+
+
+def get_sound_path(sound_name):
+    redis = redis_client.RedisClient()
+    redis.get(sound_name)
 
 
 def get_time() -> str:
