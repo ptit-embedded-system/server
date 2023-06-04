@@ -7,7 +7,7 @@ from test import test_make_infer
 
 
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import cv2
 
 tf.keras.backend.clear_session()
@@ -45,6 +45,12 @@ def upload_file():
         return "[SUCCESS] Image Received", 201
     else:
         return "[FAILED] Image not received", 204
+
+
+@app.route("/get-alert_sound", methods=["GET"])
+def get_alert_sound():
+    sound_name = request.args.get('sound_name')
+    return sound.get_sound_path(sound_name)
 
 
 @app.route('/')

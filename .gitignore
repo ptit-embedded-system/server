@@ -3,3 +3,5 @@
 ./tfod
 config/google-services.json
 ./config
+config/config.ini
+config/account-cert.json
