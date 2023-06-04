@@ -1,15 +1,14 @@
 import configparser
-
 import redis
-
-config = configparser.ConfigParser()
-config.read('config/config.ini')
 
 
 class RedisClient:
     _instance = None
 
     def __new__(cls, *args, **kwargs):
+        config = configparser.ConfigParser()
+        config.read('config/config.ini')
+
         host = config['redis']['host']
         port = int(config['redis']['port'])
         username = config['redis']['username']
@@ -36,4 +35,3 @@ class RedisClient:
     def keys(self) -> list[str]:
         key = self.redis_cli.keys("*")
         return [i.decode() for i in key]
-

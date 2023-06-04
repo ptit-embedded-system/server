@@ -1,14 +1,12 @@
 import firebase_admin
-import client
+from client import redis_client
 from firebase_admin import credentials, messaging
-
-import config
 
 
 class Firebase:
     def __init__(self):
         self.default_topic = "ptit-iot"
-        self.redis_cli = client.RedisClient()
+        self.redis_cli = redis_client.RedisClient()
         self.firebase_cred = credentials.Certificate("config/account-cert.json")
         self.firebase_app = firebase_admin.initialize_app(self.firebase_cred)
 
