@@ -5,13 +5,13 @@
   Windows:
 
   ```bash
-  python -m venv venv
+  python -m venv tfod
   ```
 
   Linux:
 
   ```bash
-  python3 -m venv venv
+  python3 -m venv tfod
   ```
 
 - Activate the environment:
@@ -19,23 +19,26 @@
   Linux/MacOS:
 
   ```bash
-  . venv/bin/activate
+  . tfod/bin/activate
   ```
 
   Windows:
 
   ```bash
-  venv\Scripts\activate
+  .\tfod\Scripts\activate
   ```
 
 - Install dependencies:
 
   ```bash
   python -m pip install --upgrade pip
-  pip install -r requirements.txt
+  pip install ipykernel
+  python -m ipykernel install --user --name=tfodj
   ```
 
 - Create a folder in project with name `uploads`
+
+- Run every cells in Install.ipynb
 
 - Run flask:
   ```bash
