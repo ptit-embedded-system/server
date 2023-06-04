@@ -2,7 +2,7 @@ import os.path
 import time
 
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import cv2
 
 app = Flask(__name__)
@@ -29,6 +29,13 @@ def upload_file():
         return "[SUCCESS] Image Received", 201
     else:
         return "[FAILED] Image not received", 204
+
+
+@app.route("/get-alert_sound", methods=["GET"])
+def get_alert_sound():
+    sound_name = request.args.get('sound_name')
+    filename = f'alert_sound/{sound_name}.mp3'
+    return send_file(filename, as_attachment=True)
 
 
 @app.route('/')
