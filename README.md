@@ -5,13 +5,13 @@
   Windows:
 
   ```bash
-  python -m venv tfod
+  python -m venv venv
   ```
 
   Linux:
 
   ```bash
-  python3 -m venv tfod
+  python3 -m venv venv
   ```
 
 - Activate the environment:
@@ -19,24 +19,34 @@
   Linux/MacOS:
 
   ```bash
-  . tfod/bin/activate
+  source venv/bin/activate
   ```
 
   Windows:
 
   ```bash
-  .\tfod\Scripts\activate
+  .\venv\Scripts\activate
   ```
 
 - Install dependencies:
 
   ```bash
   python -m pip install --upgrade pip
-  pip install ipykernel
-  python -m ipykernel install --user --name=tfodj
+  pip install jupyter ipykernel
+  python -m ipykernel install --user --name=venv
   ```
 
-- Create a folder in project with name `uploads`
+- Create a folder in project with name `uploads` (if receive file server)
+
+- Run command to run notebook with kernel of virtual environment:
+
+  ```bash
+  jupyter notebook
+  ```
+
+  This will open Jupyter Notebook in web browser.
+
+- Choose the notebook named Install.ipynb.
 
 - Run every cells in Install.ipynb
 
