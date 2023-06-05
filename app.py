@@ -46,12 +46,13 @@ def upload_file():
         print(classes)
         vat_can = ""
         min_dis = 1000000
+        if len(classes) == 0:
+            return "[SUCCESS] Image Received", 201
         for i in range(len(classes)):
             vat_can += labels.get(classes[i]) + ", " if i != len(classes) - 1 else ""
             min_dis = min(min_dis, distances[i])
             print(labels.get(classes[i]) + " " + str(distances[i]))
-
-        alert_str = f'phía trước có {len(classes)} vật cản là {vat_can}. Vật cản gần nhất cách bạn {min_dis} mét'
+        alert_str = f'phía trước có {len(classes)} vật cản là {vat_can}. Vật cản gần nhất cách bạn {min_dis} centimet'
         sound_name = sound.convert_text_to_speech(alert_str)
         if sound_name == "":
             return "[FAILED] Image not received", 204

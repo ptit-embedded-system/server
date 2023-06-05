@@ -19,9 +19,9 @@ def convert_text_to_speech(text) -> str:
     return sound_name
 
 
-def get_sound_path(sound_name):
+def get_sound_path(sound_name) -> str:
     redis = redis_client.RedisClient()
-    redis.get(sound_name)
+    return redis.get(sound_name)
 
 
 def get_time() -> str:

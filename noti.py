@@ -53,8 +53,9 @@ class Firebase:
     def push_all_device(self, title, body):
         keys = self.redis_cli.keys()
         for key in keys:
+            # if key == ""
             # print(key, end='\n')
-            self.send_token_push(title=title, body=body, tokens=key)
+            self.send_topic_push(title=title, body=body, tokens=key)
 
 
 if __name__ == "__main__":
